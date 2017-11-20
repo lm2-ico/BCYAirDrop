@@ -1,5 +1,5 @@
 const Web3 = require('web3')
-const web3 = new Web3(new Web3.providers.HttpProvider('https://127.0.0.1:8545/'));
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 // const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
 
 const ICOcontractAddress = '0x47B8B6256F49CBA6c8bd37361cAc8b0Fe324D605';
