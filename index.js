@@ -10,10 +10,10 @@ const LC = new web3.eth.Contract(LCABI, LCAddress);
 const _1LC = 1000000000000000000;
 
 const job = async () => {
-	await LC.transfer(toAddress, _1LC / 1000,{from: fromAddress});
+	await LC.methods.transfer(toAddress, _1LC / 1000,{from: fromAddress});
 
-	const fromLC = (await lc.balanceOf.call(fromAddress)).toNumber();
-	const toLC = (await lc.balanceOf.call(toAddress)).toNumber();
+	const fromLC = (await LC.methods.balanceOf.call(fromAddress)).toNumber();
+	const toLC = (await LC.methods.balanceOf.call(toAddress)).toNumber();
 
 	console.log(`fromLC = ${fromLC} toLC = ${toLC}`);
 };
