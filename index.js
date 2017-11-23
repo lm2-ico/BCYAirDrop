@@ -17,8 +17,8 @@ let count = 0;
 for (const p in wallet) {
 	const obj = wallet[p];
 	const toAddress = obj.ethAddress;
-	if (obj.totalLC > 0 && toAddress != null && toAddress.startsWith('0x') && toAddress.length == 42) {
-		const totalLC = new BN(`0.${String(obj.totalLC).split('.')[1] || 0}`);
+	if (obj.totalLC > 0 && web3.utils.isAddress(toAddress)) {
+		const totalLC = new BN(obj.totalLC);
 		// console.log(obj.totalLC);
 		// console.log(_1LC.times(totalLC).toString());
 		LC.methods.transfer(toAddress, _1LC.times(totalLC)).send({from: fromAddress, gasPrice: '100000000'});
