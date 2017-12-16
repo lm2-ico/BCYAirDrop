@@ -1,4 +1,4 @@
-const data = require('./data.json');
+const data = require('./BeyondTheVoid.json');
 const Web3 = require('web3')
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 const BN = require('bignumber.js');;
@@ -9,23 +9,26 @@ const LCABI = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"",
 const LC = new web3.eth.Contract(LCABI, LCAddress);
 const _1LC = (new BN(1000000000)).times(new BN(1000000000));
 
-const wallet = data['wallet'];
-const res = Object.keys(wallet).reduce((acc, ind) => acc + wallet[ind].totalLC, 0);
-console.log(res);
+// const wallet = data['wallet'];
+// const res = Object.keys(wallet).reduce((acc, ind) => acc + wallet[ind].totalLC, 0);
+// console.log(res);
 let count = 0;
+let total = new BN(0);
 
-for (const p in wallet) {
-	const obj = wallet[p];
-	const toAddress = obj.ethAddress;
-	if (obj.totalLC > 0 && web3.utils.isAddress(toAddress)) {
-		const totalLC = new BN(obj.totalLC);
-		// console.log(obj.totalLC);
+for (const p in data) {
+	const obj = data[p];
+	// const obj = wallet[p];
+	const toAddress = obj.address;
+	if (obj.totallc > 0 && web3.utils.isAddress(toAddress)) {
+		const totalLC = new BN(obj.totallc);
+		// console.log(obj.totallc);
+		total = total.plus(totalLC);
 		// console.log(_1LC.times(totalLC).toString());
-		LC.methods.transfer(toAddress, _1LC.times(totalLC)).send({from: fromAddress, gasPrice: '100000000'});
+		LC.methods.transfer(toAddress, _1LC.times(totalLC)).send({from: fromAddress, gasPrice: '10000000000'});
 		count++;
 	} else {
 		console.log(`${p}:`);
 		console.log(obj);
 	}
 }
-console.log(`total count = ${count}`);
+console.log(`total count = ${count}, LCs = ${total.toString()}`);
