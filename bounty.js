@@ -20,7 +20,7 @@ for (var i = 0, len = data.length; i < len; i++) {
 		// console.log(obj.totallc);
 		total = total.plus(totalLC);
 		// console.log(_1LC.times(totalLC).toString());
-		LC.methods.transfer(toAddress, _1LC.times(totalLC)).send({from: fromAddress, gasPrice: '10000000000'});
+		LC.methods.transfer(toAddress, _1LC.times(totalLC)).send({from: fromAddress, gasPrice: '4000000000'});
 		count++;
 	} else {
 		console.log(`${i}:`);
